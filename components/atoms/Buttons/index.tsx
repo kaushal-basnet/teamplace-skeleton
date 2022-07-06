@@ -1,1 +1,1 @@
-export {OutlineBtn} from "./OutlinBtn"
+export {OutlineBtn} from "./OutlineBtn"
