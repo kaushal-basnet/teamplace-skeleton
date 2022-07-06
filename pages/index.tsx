@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
-import Teamplace from './teamplace'
+import PeopleSearch from './peopleSearch'
 
 const Home: NextPage = () => {
   return (
     <>
-    <Teamplace />
+    <PeopleSearch />
     </>
   )
 }
