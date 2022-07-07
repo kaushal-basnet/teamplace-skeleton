@@ -40,7 +40,7 @@ const Header = () => {
         <Link href="/">
           <a className="headerAnchorTag">ログイン</a>
         </Link>
-        <OutlineBtn className="!h-8 w-[97px]" name="新規登録" />
+        <OutlineBtn className="!h-8 " name="新規登録" />
       </div>
     </div>
   );
