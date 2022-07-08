@@ -31,7 +31,7 @@ const Card = ({
     <div className="h-fit p-[30px] border-[1px] border-b-0 last:border-b-[1px] border-[#D9D9D9] flex gap-x-10">
       <div className="">
         <Image
-          src={pp}
+          src={pp || "/img/profilepic.jpg"}
           alt="pp"
           height={172}
           width={172}
@@ -66,7 +66,7 @@ const Card = ({
           </h6>
           <div className="flex flex-wrap gap-x-[10px] gap-y-[10px]  [&>h4]:bg-[#E9E7DE] [&>h4]:px-2 [&>h4]:rounded-sm [&>h4]:text-[12px] [&>h4]:text-[#0C0C0C] [&>h4]:leading-[25px] [&>h4]:tracking-[0.3px]">
             {/* strength */}
-            {strength.map((elem, id) => (
+            {strength?.map((elem, id) => (
               <h4 key={id}>{elem}</h4>
             ))}
             {/* <h4>組織・人事制度に強い</h4>
