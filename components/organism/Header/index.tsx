@@ -1,9 +1,11 @@
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { OutlineBtn } from "../../atoms";
 
 const Header = () => {
+  const { t } = useTranslation();
   return (
     <div className="h-20 w-full flex items-center  justify-between px-10 ">
       {/* left side */}
@@ -22,25 +24,25 @@ const Header = () => {
         </div>
         <div className="flex  items-center gap-x-[30px] [&>a]:font-semibold text-[#0C0C0C] text-[14px] leading-4">
           <Link href="/">
-            <a className="headerAnchorTag">ワークプレイスをさがす</a>
+            <a className="headerAnchorTag">{t("Workplace")}</a>
           </Link>
           <Link href="/">
-            <a className="headerAnchorTag">イベントをさがす</a>
+            <a className="headerAnchorTag">{t("Event")}</a>
           </Link>
           <Link href="/">
-            <a className="headerAnchorTag">人のつながりをさがす</a>
+            <a className="headerAnchorTag">{t("Connections")} </a>
           </Link>
         </div>
       </div>
       {/* right side */}
       <div className="flex  items-center gap-x-[30px] [&>a]:font-semibold text-[#0C0C0C] text-[14px] leading-4">
         <Link href="/">
-          <a className="headerAnchorTag">スペースを登録する</a>
+          <a className="headerAnchorTag">{t("Register")} </a>
         </Link>
         <Link href="/">
-          <a className="headerAnchorTag">ログイン</a>
+          <a className="headerAnchorTag">{t("Login")}</a>
         </Link>
-        <OutlineBtn className="!h-8 " name="新規登録" />
+        <OutlineBtn className="!h-8 " name={t("sign up")} />
       </div>
     </div>
   );

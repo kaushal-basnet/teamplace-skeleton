@@ -10,10 +10,13 @@ import {
 import axios from "axios";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { Spinner } from "@chakra-ui/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const PeopleSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [allData, setAllData] = useState([] as any);
+  const { t } = useTranslation();
   const [totalCount, setTotalCount] = useState(0);
   const getInfo = () => {
     return axios.get(
@@ -24,14 +27,14 @@ const PeopleSearch = () => {
     // handle automatically run while click in inspect
     refetchOnWindowFocus: false,
   });
-  //
 
+  // for see more
   const getSeeMore = () => {
     return axios.get(
       `https://teamplace-development.an.r.appspot.com/user/search?pageSize=5&page=${currentPage}`
     );
   };
-  // for see more
+
   const { isLoading, data: usersData } = useQuery(
     // without useeffect keep in currentpage after render
     ["get-users", currentPage],
@@ -45,7 +48,7 @@ const PeopleSearch = () => {
       },
     }
   );
-  console.log(usersData, "usersdata");
+  // console.log(usersData, "usersdata");
 
   const onPageChange = () => {
     setCurrentPage(currentPage + 1);
@@ -58,7 +61,7 @@ const PeopleSearch = () => {
       <div className="mx-[170px]">
         <SearchSection />
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
-          注目の人
+          {t("People")}
         </h2>
         <div className="">
           {data?.data?.data.map((elem: any) => (
@@ -81,7 +84,7 @@ const PeopleSearch = () => {
         </div>
 
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
-          価値観の合う人を探そう
+          {t("Find someone who matches your values")}
         </h2>
         <div className="">
           {allData.map((elem: any) => (
@@ -104,7 +107,7 @@ const PeopleSearch = () => {
         </div>
       </div>
       {/* see More Section */}
-      {/* see all the data if there is any data remaining in total data eg;(42-40)= 2 remaining data */}
+      {/* showing the remaining data from total data eg;(42-40)= 2 remaining data */}
       {allData.length < totalCount && (
         <div className="flex justify-center mt-[51px]" onClick={onPageChange}>
           <OutlineBtn
@@ -131,3 +134,12 @@ const PeopleSearch = () => {
 };
 
 export default PeopleSearch;
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "header"])),
+      // Will be passed to the page component as props
+    },
+  };
+}

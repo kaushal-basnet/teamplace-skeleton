@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
 import { OutlineBtn } from "../../atoms";
@@ -27,6 +28,7 @@ const Card = ({
   values,
   strength,
 }: Props) => {
+  const { t } = useTranslation();
   return (
     <div className="h-fit p-[30px] border-[1px] border-b-0 last:border-b-[1px] border-[#D9D9D9] flex gap-x-10">
       <div className="">
@@ -47,7 +49,7 @@ const Card = ({
           </p>
           <OutlineBtn
             className="w-[242px] !h-[40px] !bg-[#80722A] [&>p]:text-white [&>p]:hover:text-[#80722A]"
-            name="フォロー"
+            name={t("Follow")}
           />
         </div>
 
@@ -62,7 +64,7 @@ const Card = ({
         </div>
         <div className="flex">
           <h6 className="mr-12 text-[12px] text-[#898880] leading-[25px] tracking-[0.3px] whitespace-nowrap">
-            職種・強み
+            {t("Job type / strength")}
           </h6>
           <div className="flex flex-wrap gap-x-[10px] gap-y-[10px]  [&>h4]:bg-[#E9E7DE] [&>h4]:px-2 [&>h4]:rounded-sm [&>h4]:text-[12px] [&>h4]:text-[#0C0C0C] [&>h4]:leading-[25px] [&>h4]:tracking-[0.3px]">
             {/* strength */}
@@ -74,8 +76,8 @@ const Card = ({
           </div>
         </div>
         <div className="flex mt-[17px] mb-5">
-          <h6 className="mr-10 text-[10px] text-[#898880] leading-[25px] tracking-[0.3px] whitespace-nowrap">
-            価値観
+          <h6 className="mr-10 text-[12px] text-[#898880] leading-[25px] tracking-[0.3px] whitespace-nowrap">
+            {t("Values")}
           </h6>
           <div className="flex flex-wrap gap-x-[10px] gap-y-[10px] [&>button]:!h-[27px] [&>button>p]:text-[12px] [&>button>p]:text-[#0C0C0C] [&>button>p]:leading-[25px]">
             {/* values */}
@@ -93,15 +95,15 @@ const Card = ({
           [&>div>p]:text-[#0C0C0C]"
         >
           <div className="flex">
-            <h6>出身</h6>
+            <h6> {t("Birthplace")}</h6>
             <p>{birthplace}</p>
           </div>
           <div className="flex">
-            <h6>居住地</h6>
+            <h6> {t("Current")}</h6>
             <p>{current}</p>
           </div>
           <div className="flex">
-            <h6>関わりのある地域</h6>
+            <h6> {t("Region")}</h6>
             <p>{region}</p>
             {/* <p>{hobbies}</p> */}
           </div>
