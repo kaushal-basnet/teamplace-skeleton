@@ -13,13 +13,15 @@ import { Spinner } from "@chakra-ui/react";
 
 const PeopleSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [allData, setAllData] = useState([]);
+  const [allData, setAllData] = useState([] as any);
+  const [totalCount, setTotalCount] = useState(0);
   const getInfo = () => {
     return axios.get(
       "https://teamplace-development.an.r.appspot.com/user/random-featured-members"
     );
   };
   const { error, data, isFetching } = useQuery("todos", getInfo, {
+    // handle automatically run while click in inspect
     refetchOnWindowFocus: false,
   });
   //
@@ -29,13 +31,16 @@ const PeopleSearch = () => {
       `https://teamplace-development.an.r.appspot.com/user/search?pageSize=5&page=${currentPage}`
     );
   };
+  // for see more
   const { isLoading, data: usersData } = useQuery(
+    // without useeffect keep in currentpage after render
     ["get-users", currentPage],
     getSeeMore,
     {
+      // refetchOnWindowFocus: false:- handle automatically run while click in inspect
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
-        console.log("success", data);
+        setTotalCount(data?.data?.count);
         setAllData([...allData, ...data?.data?.data]);
       },
     }
@@ -97,19 +102,17 @@ const PeopleSearch = () => {
             />
           ))}
         </div>
-        {/* <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card /> */}
       </div>
       {/* see More Section */}
-      <div className="flex justify-center mt-[51px]" onClick={onPageChange}>
-        <OutlineBtn
-          className="hover:!bg-[#80722A] [&>p]:hover:text-white"
-          name="もっと見る"
-        />
-      </div>
+      {/* see all the data if there is any data remaining in total data eg;(42-40)= 2 remaining data */}
+      {allData.length < totalCount && (
+        <div className="flex justify-center mt-[51px]" onClick={onPageChange}>
+          <OutlineBtn
+            className="hover:!bg-[#80722A] [&>p]:hover:text-white"
+            name="もっと見る"
+          />
+        </div>
+      )}
 
       {/* // isloading : while fetching api || loading: if (token === null) */}
       {isLoading && (
@@ -119,7 +122,6 @@ const PeopleSearch = () => {
             speed="0.65s"
             emptyColor="gray.200"
             color="blue.500"
-            // size="250px"
           />
         </div>
       )}
