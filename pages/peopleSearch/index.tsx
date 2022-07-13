@@ -14,6 +14,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const PeopleSearch = () => {
+  const [filter, setfilter] = useState({
+    selectedJob: [],
+    selectedvalue: [],
+    selctedhobbies: [],
+  });
   const [selectedJob, setSelectedJob] = useState([] as any);
   const [selectedvalue, setselectedvalue] = useState([] as string[]);
   const [selctedhobbies, setselctedhobbies] = useState([] as string[]);
@@ -64,12 +69,14 @@ const PeopleSearch = () => {
       <ImageSection />
       <div className="mx-[170px]">
         <SearchSection
-          selectedJob={selectedJob}
-          setSelectedJob={setSelectedJob}
-          selectedvalue={selectedvalue}
-          setselectedvalue={setselectedvalue}
-          selctedhobbies={selctedhobbies}
-          setselctedhobbies={setselctedhobbies}
+          // selectedJob={selectedJob}
+          // setSelectedJob={setSelectedJob}
+          // selectedvalue={selectedvalue}
+          // setselectedvalue={setselectedvalue}
+          // selctedhobbies={selctedhobbies}
+          // setselctedhobbies={setselctedhobbies}
+          filter={filter}
+          setfilter={setfilter}
         />
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
           {t("People")}

@@ -17,12 +17,9 @@ interface Props {
   closeOnOverlayClick: boolean;
   isOpen: boolean;
   name: string;
-  selectedJob: string[];
-  setSelectedJob: any;
-  selectedvalue: string[];
-  setselectedvalue: any;
-  selctedhobbies: string[];
-  setselctedhobbies: any;
+
+  filter: any;
+  setfilter: any;
 }
 
 const ModalSection = ({
@@ -30,53 +27,60 @@ const ModalSection = ({
   closeOnOverlayClick,
   isOpen,
   name,
-  selectedJob,
-  setSelectedJob,
-  selectedvalue,
-  setselectedvalue,
-  selctedhobbies,
-  setselctedhobbies,
+
+  filter,
+  setfilter,
 }: Props) => {
   const { t } = useTranslation();
 
   //only selected array case:
   const onSelect = (selectedValue: string, index: number) => {
     if (name === t("Job type / strength")) {
-      if (selectedJob.includes(selectedValue)) {
+      if (filter.selectedJob.includes(selectedValue)) {
         // remove from selected array
-        const remainingItems = selectedJob.filter(
+        const remainingItems = filter.selectedJob.filter(
           (item: string, id: number) => {
             return item !== selectedValue;
           }
         );
-        setSelectedJob([...remainingItems]);
+        //filter is object{make sure changing job value does not hamper others values so...filter, and select to update exact value=>selectedJob:[] }
+        setfilter({ ...filter, selectedJob: [...remainingItems] });
       } else {
         // else show the all selected array data
-        setSelectedJob([...selectedJob, selectedValue]);
+        setfilter({
+          ...filter,
+          selectedJob: [...filter.selectedJob, selectedValue],
+        });
       }
     }
     if (name === t("Values")) {
-      if (selectedvalue.includes(selectedValue)) {
-        const remainingItems = selectedvalue.filter(
+      if (filter.selectedvalue.includes(selectedValue)) {
+        const remainingItems = filter.selectedvalue.filter(
           (item: string, id: number) => {
             return item !== selectedValue;
           }
         );
-        setselectedvalue([...remainingItems]);
+        setfilter({ ...filter, selectedValue: [...remainingItems] });
       } else {
-        setselectedvalue([...selectedvalue, selectedValue]);
+        setfilter({
+          ...filter,
+          selectedvalue: [...filter.selectedvalue, selectedValue],
+        });
       }
     }
     if (name === t("Hobbies / favorite")) {
-      if (selctedhobbies.includes(selectedValue)) {
-        const remainingItems = selectedvalue.filter(
+      if (filter.selctedhobbies.includes(selectedValue)) {
+        const remainingItems = filter.selectedvalue.filter(
           (item: string, id: number) => {
             return item !== selectedValue;
           }
         );
-        setselctedhobbies([...remainingItems]);
+        setfilter({ ...filter, selctedhobbies: [...remainingItems] });
       } else {
-        setselctedhobbies([...selctedhobbies, selectedValue]);
+        setfilter({
+          ...filter,
+          selctedhobbies: [...filter.selctedhobbies, selectedValue],
+        });
       }
     }
     // console.log(selectedvalue, "value");
@@ -84,11 +88,11 @@ const ModalSection = ({
 
   const isPresent = (item: any) => {
     if (name === t("Job type / strength")) {
-      return selectedJob.includes(item);
+      return filter.selectedJob.includes(item);
     } else if (name === t("Values")) {
-      return selectedvalue.includes(item);
+      return filter.selectedvalue.includes(item);
     } else {
-      return selctedhobbies.includes(item);
+      return filter.selctedhobbies.includes(item);
     }
   };
   // console.log("job", jobValue);

@@ -10,21 +10,10 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import { ModalSection } from "../ModalSection";
 interface Props {
-  selectedJob: string[];
-  setSelectedJob: any;
-  selectedvalue: string[];
-  setselectedvalue: any;
-  selctedhobbies: string[];
-  setselctedhobbies: any;
+  filter: any;
+  setfilter: any;
 }
-const SearchSection = ({
-  selectedJob,
-  setSelectedJob,
-  selectedvalue,
-  setselectedvalue,
-  selctedhobbies,
-  setselctedhobbies,
-}: Props) => {
+const SearchSection = ({ filter, setfilter }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [names, setNames] = useState("");
@@ -38,12 +27,8 @@ const SearchSection = ({
             name={names}
             onClose={onClose}
             closeOnOverlayClick={true}
-            selectedJob={selectedJob}
-            setSelectedJob={setSelectedJob}
-            selectedvalue={selectedvalue}
-            setselectedvalue={setselectedvalue}
-            selctedhobbies={selctedhobbies}
-            setselctedhobbies={setselctedhobbies}
+            filter={filter}
+            setfilter={setfilter}
           />
         </div>
         <div
