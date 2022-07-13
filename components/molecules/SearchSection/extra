@@ -1,0 +1,49 @@
+  const { t } = useTranslation();
+  const [jobValue, setjobValue] = useState([] as any);
+  const [valueSection, setvalueSection] = useState([] as any);
+  const [hobbiesValue, sethobbiesValue] = useState([] as any);
+
+  //only selected array case:
+  const onSelect = (selectedValue: string, index: number) => {
+    if (jobValue.includes(selectedValue)) {
+      // remove from selected array
+      const remainingItems = jobValue.filter((item: string, id: number) => {
+        return item !== selectedValue;
+      });
+      setjobValue([...remainingItems]);
+    } else {
+      // else show the all selected array data
+      setjobValue([...jobValue, selectedValue]);
+    }
+    if (valueSection.includes(selectedValue)) {
+      const remainingItems = valueSection.filter((item: string, id: number) => {
+        return item !== selectedValue;
+      });
+      setvalueSection([...remainingItems]);
+    } else {
+      setvalueSection([...valueSection, selectedValue]);
+    }
+  };
+  //      if(hobbiesValue.includes(selectedValue)){
+  //     const remainingItems = valueSection.filter((item:string, id:number)=>{
+  //       return item!== selectedValue;
+  //     });
+  //     sethobbiesValue([...remainingItems]);
+
+  //   }else {
+  //     sethobbiesValue([...valueSection, selectedValue ])
+  //   }
+  // }
+
+  const isPresent = (item: any) => {
+    return
+    if (name === "Job type / strength") {
+      return jobValue.includes(item);
+    } else if (name === "Values") {
+      return valueSection.include(item);
+    } else {
+      return hobbiesValue.includes(item);
+    }
+  };
+  console.log("job", jobValue);
+  console.log(valueSection, "value");

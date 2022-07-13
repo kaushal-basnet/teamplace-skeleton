@@ -14,6 +14,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const PeopleSearch = () => {
+  const [selectedJob, setSelectedJob] = useState([] as any);
+  const [selectedvalue, setselectedvalue] = useState([] as string[]);
+  const [selctedhobbies, setselctedhobbies] = useState([] as string[]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [allData, setAllData] = useState([] as any);
   const { t } = useTranslation();
@@ -59,7 +63,14 @@ const PeopleSearch = () => {
       <Header />
       <ImageSection />
       <div className="mx-[170px]">
-        <SearchSection />
+        <SearchSection
+          selectedJob={selectedJob}
+          setSelectedJob={setSelectedJob}
+          selectedvalue={selectedvalue}
+          setselectedvalue={setselectedvalue}
+          selctedhobbies={selctedhobbies}
+          setselctedhobbies={setselctedhobbies}
+        />
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
           {t("People")}
         </h2>

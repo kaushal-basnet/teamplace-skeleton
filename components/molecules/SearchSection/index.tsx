@@ -1,62 +1,73 @@
 import {
-  Button,
   Input,
   InputGroup,
   InputLeftElement,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { OutlineBtn } from "../../atoms";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
-
-const SearchSection = () => {
+import { ModalSection } from "../ModalSection";
+interface Props {
+  selectedJob: string[];
+  setSelectedJob: any;
+  selectedvalue: string[];
+  setselectedvalue: any;
+  selctedhobbies: string[];
+  setselctedhobbies: any;
+}
+const SearchSection = ({
+  selectedJob,
+  setSelectedJob,
+  selectedvalue,
+  setselectedvalue,
+  selctedhobbies,
+  setselctedhobbies,
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [names, setNames] = useState("");
+
   return (
     <div className="h-[100px] w-full flex items-center justify-between border-b-[1px] border-b-[#D9D9D9] ">
       <div className="flex gap-x-[4px] [&>button]:!h-8 pt-4">
         <div>
-          <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>{t("Job type / strength")}</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <div className="flex flex-wrap gap-x-[10px] gap-y-[10px]  [&>h4]:bg-[#E9E7DE] [&>h4]:px-2 [&>h4]:rounded-sm [&>h4]:text-[12px] [&>h4]:text-[#0C0C0C] [&>h4]:leading-[25px] [&>h4]:tracking-[0.3px]">
-                  <h4>strength</h4>
-
-                  {/* <h4>組織・人事制度に強い</h4>
-          <h4>組織・人事制度に強い</h4> */}
-                </div>
-              </ModalBody>
-
-              <ModalFooter className="flex justify-start gap-x-4">
-                <OutlineBtn
-                  className="!text-[14px] !bg-[#80722A] [&>p]:text-white [&>p]:hover:text-[#80722A]"
-                  name={t("Explore")}
-                />
-                <div onClick={onClose}>
-                  <OutlineBtn className="!text-[14px]" name={t("Cancel")} />
-                </div>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
+          <ModalSection
+            isOpen={isOpen}
+            name={names}
+            onClose={onClose}
+            closeOnOverlayClick={true}
+            selectedJob={selectedJob}
+            setSelectedJob={setSelectedJob}
+            selectedvalue={selectedvalue}
+            setselectedvalue={setselectedvalue}
+            selctedhobbies={selctedhobbies}
+            setselctedhobbies={setselctedhobbies}
+          />
         </div>
-        <div onClick={onOpen}>
+        <div
+          onClick={() => {
+            onOpen();
+            setNames(t("Job type / strength"));
+          }}
+        >
           <OutlineBtn className="button" name={t("Job type / strength")} />
         </div>
-        <div onClick={onOpen}>
+        <div
+          onClick={() => {
+            onOpen();
+            setNames(t("Values"));
+          }}
+        >
           <OutlineBtn className="button" name={t("Values")} />
         </div>
-        <div onClick={onOpen}>
+        <div
+          onClick={() => {
+            onOpen();
+            setNames(t("Hobbies / favorite"));
+          }}
+        >
           <OutlineBtn className="button" name={t("Hobbies / favorite")} />
         </div>
       </div>
