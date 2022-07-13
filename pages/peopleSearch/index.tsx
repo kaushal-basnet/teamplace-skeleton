@@ -19,9 +19,9 @@ const PeopleSearch = () => {
     selectedvalue: [],
     selctedhobbies: [],
   });
-  const [selectedJob, setSelectedJob] = useState([] as any);
-  const [selectedvalue, setselectedvalue] = useState([] as string[]);
-  const [selctedhobbies, setselctedhobbies] = useState([] as string[]);
+  // const [selectedJob, setSelectedJob] = useState([] as any);
+  // const [selectedvalue, setselectedvalue] = useState([] as string[]);
+  // const [selctedhobbies, setselctedhobbies] = useState([] as string[]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [allData, setAllData] = useState([] as any);

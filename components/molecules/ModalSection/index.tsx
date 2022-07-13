@@ -34,13 +34,13 @@ const ModalSection = ({
   const { t } = useTranslation();
 
   //only selected array case:
-  const onSelect = (selectedValue: string, index: number) => {
+  const onSelect = (selectedData: string, index: number) => {
     if (name === t("Job type / strength")) {
-      if (filter.selectedJob.includes(selectedValue)) {
+      if (filter.selectedJob.includes(selectedData)) {
         // remove from selected array
         const remainingItems = filter.selectedJob.filter(
           (item: string, id: number) => {
-            return item !== selectedValue;
+            return item !== selectedData;
           }
         );
         //filter is object{make sure changing job value does not hamper others values so...filter, and select to update exact value=>selectedJob:[] }
@@ -49,37 +49,37 @@ const ModalSection = ({
         // else show the all selected array data
         setfilter({
           ...filter,
-          selectedJob: [...filter.selectedJob, selectedValue],
+          selectedJob: [...filter.selectedJob, selectedData],
         });
       }
     }
     if (name === t("Values")) {
-      if (filter.selectedvalue.includes(selectedValue)) {
+      if (filter.selectedvalue.includes(selectedData)) {
         const remainingItems = filter.selectedvalue.filter(
           (item: string, id: number) => {
-            return item !== selectedValue;
+            return item !== selectedData;
           }
         );
-        setfilter({ ...filter, selectedValue: [...remainingItems] });
+        setfilter({ ...filter, selectedvalue: [...remainingItems] });
       } else {
         setfilter({
           ...filter,
-          selectedvalue: [...filter.selectedvalue, selectedValue],
+          selectedvalue: [...filter.selectedvalue, selectedData],
         });
       }
     }
     if (name === t("Hobbies / favorite")) {
-      if (filter.selctedhobbies.includes(selectedValue)) {
-        const remainingItems = filter.selectedvalue.filter(
+      if (filter.selctedhobbies.includes(selectedData)) {
+        const remainingItems = filter.selctedhobbies.filter(
           (item: string, id: number) => {
-            return item !== selectedValue;
+            return item !== selectedData;
           }
         );
         setfilter({ ...filter, selctedhobbies: [...remainingItems] });
       } else {
         setfilter({
           ...filter,
-          selctedhobbies: [...filter.selctedhobbies, selectedValue],
+          selctedhobbies: [...filter.selctedhobbies, selectedData],
         });
       }
     }
