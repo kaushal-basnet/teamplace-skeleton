@@ -17,7 +17,6 @@ interface Props {
   closeOnOverlayClick: boolean;
   isOpen: boolean;
   name: string;
-
   filter: any;
   setfilter: any;
 }
@@ -31,71 +30,88 @@ const ModalSection = ({
   filter,
   setfilter,
 }: Props) => {
+  const [select, setselect] = useState({
+    selectedJob: [] as string[],
+    selectedvalue: [] as string[],
+    selectedhobbies: [] as string[],
+  });
   const { t } = useTranslation();
 
-  //only selected array case:
-  const onSelect = (selectedData: string, index: number) => {
+  //During click on value if any value includes than remove that included value  or add old values and new value in select array
+  const onSelect = (elem: any, index: number) => {
     if (name === t("Job type / strength")) {
-      if (filter.selectedJob.includes(selectedData)) {
+      if (select.selectedJob.includes(elem)) {
         // remove from selected array
-        const remainingItems = filter.selectedJob.filter(
+        const remainingItems = select.selectedJob.filter(
           (item: string, id: number) => {
-            return item !== selectedData;
+            return item !== elem;
           }
         );
-        //filter is object{make sure changing job value does not hamper others values so...filter, and select to update exact value=>selectedJob:[] }
-        setfilter({ ...filter, selectedJob: [...remainingItems] });
+        // console.log(select.selectedJob);
+        //select is object{make sure changing job value does not hamper others values so...filter, and select to update exact value=>selectedJob:[] }
+        setselect({ ...select, selectedJob: [...remainingItems] });
       } else {
         // else show the all selected array data
-        setfilter({
-          ...filter,
-          selectedJob: [...filter.selectedJob, selectedData],
+        setselect({
+          ...select,
+          selectedJob: [...select.selectedJob, elem],
         });
       }
     }
     if (name === t("Values")) {
-      if (filter.selectedvalue.includes(selectedData)) {
-        const remainingItems = filter.selectedvalue.filter(
+      if (select.selectedvalue.includes(elem)) {
+        const remainingItems = select.selectedvalue.filter(
           (item: string, id: number) => {
-            return item !== selectedData;
+            return item !== elem;
           }
         );
-        setfilter({ ...filter, selectedvalue: [...remainingItems] });
+        setselect({ ...select, selectedvalue: [...remainingItems] });
       } else {
-        setfilter({
-          ...filter,
-          selectedvalue: [...filter.selectedvalue, selectedData],
+        setselect({
+          ...select,
+          selectedvalue: [...select.selectedvalue, elem],
         });
       }
     }
     if (name === t("Hobbies / favorite")) {
-      if (filter.selctedhobbies.includes(selectedData)) {
-        const remainingItems = filter.selctedhobbies.filter(
+      if (select.selectedhobbies.includes(elem)) {
+        const remainingItems = select.selectedhobbies.filter(
           (item: string, id: number) => {
-            return item !== selectedData;
+            return item !== elem;
           }
         );
-        setfilter({ ...filter, selctedhobbies: [...remainingItems] });
+        setselect({ ...select, selectedhobbies: [...remainingItems] });
       } else {
-        setfilter({
-          ...filter,
-          selctedhobbies: [...filter.selctedhobbies, selectedData],
+        setselect({
+          ...select,
+          selectedhobbies: [...select.selectedhobbies, elem],
         });
       }
     }
     // console.log(selectedvalue, "value");
   };
-
+  //  included value from select array
   const isPresent = (item: any) => {
     if (name === t("Job type / strength")) {
-      return filter.selectedJob.includes(item);
+      return select.selectedJob.includes(item);
     } else if (name === t("Values")) {
-      return filter.selectedvalue.includes(item);
+      return select.selectedvalue.includes(item);
     } else {
-      return filter.selctedhobbies.includes(item);
+      return select.selectedhobbies.includes(item);
     }
   };
-  // console.log("job", jobValue);
+  // filter while explore:callback function
+  const onSearch = () => {
+    if (name === t("Job type / strength")) {
+      setfilter({ ...select, selectedJob: [select.selectedJob] });
+    }
+    if (name === t("Values")) {
+      setfilter({ ...select, selectedvalue: [select.selectedvalue] });
+    }
+    if (name === t("hobbies")) {
+      setfilter({ ...select, selectedhobbies: [select.selectedhobbies] });
+    }
+  };
   return (
     <>
       <Modal
@@ -130,10 +146,18 @@ const ModalSection = ({
           </ModalBody>
 
           <ModalFooter className="flex justify-start gap-x-4">
-            <OutlineBtn
-              className="!text-[14px] !bg-[#80722A] [&>p]:text-white [&>p]:hover:text-[#80722A]"
-              name="Explore"
-            />
+            <div
+              onClick={() => {
+                onClose();
+                onSearch();
+              }}
+            >
+              <OutlineBtn
+                className="!text-[14px] !bg-[#80722A] [&>p]:text-white [&>p]:hover:text-[#80722A]"
+                name="Explore"
+              />
+            </div>
+
             <div onClick={onClose}>
               <OutlineBtn className="!text-[14px]" name="Cancel" />
             </div>

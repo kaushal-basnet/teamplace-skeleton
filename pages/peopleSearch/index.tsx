@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Footer,
@@ -14,15 +14,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const PeopleSearch = () => {
+  // getting values from callback function
   const [filter, setfilter] = useState({
     selectedJob: [],
     selectedvalue: [],
-    selctedhobbies: [],
+    selectedhobbies: [],
   });
-  // const [selectedJob, setSelectedJob] = useState([] as any);
-  // const [selectedvalue, setselectedvalue] = useState([] as string[]);
-  // const [selctedhobbies, setselctedhobbies] = useState([] as string[]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [allData, setAllData] = useState([] as any);
   const { t } = useTranslation();
@@ -40,20 +37,41 @@ const PeopleSearch = () => {
   // for see more
   const getSeeMore = () => {
     return axios.get(
-      `https://teamplace-development.an.r.appspot.com/user/search?pageSize=5&page=${currentPage}`
+      `https://teamplace-development.an.r.appspot.com/user/search`,
+      {
+        params: {
+          pageSize: 5,
+          page: currentPage,
+          // toString to change in string from array
+          strengths: filter.selectedJob.toString(),
+          values: filter.selectedvalue.toString(),
+          hobbies: filter.selectedhobbies.toString(),
+        },
+      }
     );
   };
 
   const { isLoading, data: usersData } = useQuery(
-    // without useeffect keep in currentpage after render
-    ["get-users", currentPage],
+    //call Api if these changes as like useeffect dependency
+    [
+      "get-users",
+      currentPage,
+      filter.selectedJob,
+      filter.selectedhobbies,
+      filter.selectedvalue,
+    ],
     getSeeMore,
+
     {
       // refetchOnWindowFocus: false:- handle automatically run while click in inspect
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
         setTotalCount(data?.data?.count);
-        setAllData([...allData, ...data?.data?.data]);
+        if (data?.data?.data) {
+          setAllData([...allData, ...data?.data?.data]);
+        } else {
+          setAllData([]);
+        }
       },
     }
   );
@@ -62,22 +80,17 @@ const PeopleSearch = () => {
   const onPageChange = () => {
     setCurrentPage(currentPage + 1);
   };
+  useEffect(() => {
+    setAllData([]);
+    // calls Api if these changes; used to maintain pagesize on success while filter
+  }, [filter.selectedJob, filter.selectedhobbies, filter.selectedvalue]);
 
   return (
     <>
       <Header />
       <ImageSection />
       <div className="mx-[170px]">
-        <SearchSection
-          // selectedJob={selectedJob}
-          // setSelectedJob={setSelectedJob}
-          // selectedvalue={selectedvalue}
-          // setselectedvalue={setselectedvalue}
-          // selctedhobbies={selctedhobbies}
-          // setselctedhobbies={setselctedhobbies}
-          filter={filter}
-          setfilter={setfilter}
-        />
+        <SearchSection filter={filter} setfilter={setfilter} />
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
           {t("People")}
         </h2>

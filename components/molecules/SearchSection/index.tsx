@@ -10,7 +10,7 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import { ModalSection } from "../ModalSection";
 interface Props {
-  filter: any;
+  filter:any;
   setfilter: any;
 }
 const SearchSection = ({ filter, setfilter }: Props) => {
