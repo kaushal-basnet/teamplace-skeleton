@@ -19,6 +19,7 @@ interface Props {
   name: string;
   filter: any;
   setfilter: any;
+  settoggle: any;
 }
 
 const ModalSection = ({
@@ -29,6 +30,7 @@ const ModalSection = ({
 
   filter,
   setfilter,
+  settoggle,
 }: Props) => {
   const [select, setselect] = useState({
     selectedJob: [] as string[],
@@ -104,13 +106,35 @@ const ModalSection = ({
   const onSearch = () => {
     if (name === t("Job type / strength")) {
       setfilter({ ...select, selectedJob: [select.selectedJob] });
+      settoggle(false);
     }
     if (name === t("Values")) {
       setfilter({ ...select, selectedvalue: [select.selectedvalue] });
+      settoggle(false);
     }
     if (name === t("hobbies")) {
       setfilter({ ...select, selectedhobbies: [select.selectedhobbies] });
+      settoggle(false);
     }
+  };
+  // empty the select array
+  const onCancel = () => {
+    if (name === t("Job type / strength")) {
+      setselect({ ...select, selectedJob: [] });
+      settoggle(true);
+    }
+    if (name === t("Values")) {
+      setselect({ ...select, selectedvalue: [] });
+      settoggle(true);
+    }
+    if (name === t("hobbies")) {
+      setselect({ ...select, selectedhobbies: [] });
+      settoggle(true);
+    }
+    console.log(select);
+  };
+  const onExit = () => {
+    // settoggle(true)
   };
   return (
     <>
@@ -122,7 +146,7 @@ const ModalSection = ({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{name}</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton onClick={onExit} />
           <ModalBody pb={6}>
             <div className="flex flex-wrap gap-x-[10px] gap-y-[10px]  [&>div]:bg-[#E9E7DE] [&>div]:px-2 [&>div]:rounded-sm [&>div]:text-[12px] [&>div]:text-[#0C0C0C] [&>div]:leading-[25px] [&>div]:tracking-[0.3px]">
               {(name === t("Job type / strength")
@@ -158,7 +182,12 @@ const ModalSection = ({
               />
             </div>
 
-            <div onClick={onClose}>
+            <div
+              onClick={() => {
+                onClose();
+                onCancel();
+              }}
+            >
               <OutlineBtn className="!text-[14px]" name="Cancel" />
             </div>
           </ModalFooter>

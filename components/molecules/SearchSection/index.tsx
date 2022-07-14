@@ -10,10 +10,11 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import { ModalSection } from "../ModalSection";
 interface Props {
-  filter:any;
+  filter: any;
   setfilter: any;
+  settoggle: any;
 }
-const SearchSection = ({ filter, setfilter }: Props) => {
+const SearchSection = ({ filter, setfilter, settoggle }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [names, setNames] = useState("");
@@ -29,6 +30,7 @@ const SearchSection = ({ filter, setfilter }: Props) => {
             closeOnOverlayClick={true}
             filter={filter}
             setfilter={setfilter}
+            settoggle={settoggle}
           />
         </div>
         <div

@@ -24,6 +24,7 @@ const PeopleSearch = () => {
   const [allData, setAllData] = useState([] as any);
   const { t } = useTranslation();
   const [totalCount, setTotalCount] = useState(0);
+  const [toggle, settoggle] = useState(true);
   const getInfo = () => {
     return axios.get(
       "https://teamplace-development.an.r.appspot.com/user/random-featured-members"
@@ -90,33 +91,42 @@ const PeopleSearch = () => {
       <Header />
       <ImageSection />
       <div className="mx-[170px]">
-        <SearchSection filter={filter} setfilter={setfilter} />
-        <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
-          {t("People")}
-        </h2>
-        <div className="">
-          {data?.data?.data.map((elem: any) => (
-            <Card
-              key={elem.id}
-              pp={elem.profile_picture}
-              fname={elem.first_name}
-              lname={elem.last_name}
-              catchPhrase={elem.catchphrase}
-              companyName={elem.company_name}
-              // jobTitle={elem.job_title}
-              strength={elem.strength}
-              values={elem.value}
-              birthplace={elem.home_town}
-              current={elem.live}
-              region={elem.region}
-              hobbies={elem.hobbies}
-            />
-          ))}
-        </div>
+        <SearchSection
+          filter={filter}
+          setfilter={setfilter}
+          settoggle={settoggle}
+        />
+        {toggle && (
+          <div>
+            <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
+              {t("People")}
+            </h2>
 
+            <div className="">
+              {data?.data?.data.map((elem: any) => (
+                <Card
+                  key={elem.id}
+                  pp={elem.profile_picture}
+                  fname={elem.first_name}
+                  lname={elem.last_name}
+                  catchPhrase={elem.catchphrase}
+                  companyName={elem.company_name}
+                  // jobTitle={elem.job_title}
+                  strength={elem.strength}
+                  values={elem.value}
+                  birthplace={elem.home_town}
+                  current={elem.live}
+                  region={elem.region}
+                  hobbies={elem.hobbies}
+                />
+              ))}
+            </div>
+          </div>
+        )}
         <h2 className="my-[50px] leading-[38px] text-[30px] font-bold text-[#0C0C0C] tracking-[0.3px]">
           {t("Find someone who matches your values")}
         </h2>
+
         <div className="">
           {allData.map((elem: any) => (
             <Card
