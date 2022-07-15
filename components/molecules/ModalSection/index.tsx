@@ -131,7 +131,7 @@ const ModalSection = ({
       setselect({ ...select, selectedhobbies: [] });
       settoggle(true);
     }
-    console.log(select);
+    // console.log(select);
   };
   const onExit = () => {
     // settoggle(true)

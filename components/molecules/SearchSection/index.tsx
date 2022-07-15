@@ -13,12 +13,24 @@ interface Props {
   filter: any;
   setfilter: any;
   settoggle: any;
+  searchText: string;
+  setSearchText: any;
 }
-const SearchSection = ({ filter, setfilter, settoggle }: Props) => {
+const SearchSection = ({
+  filter,
+  setfilter,
+  settoggle,
+  searchText,
+  setSearchText,
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [names, setNames] = useState("");
 
+  const onSearch = (e: any) => {
+    setSearchText(e.target.value);
+    settoggle(false);
+  };
   return (
     <div className="h-[100px] w-full flex items-center justify-between border-b-[1px] border-b-[#D9D9D9] ">
       <div className="flex gap-x-[4px] [&>button]:!h-8 pt-4">
@@ -63,7 +75,10 @@ const SearchSection = ({ filter, setfilter, settoggle }: Props) => {
           <InputLeftElement>
             <SearchIcon className="h-[14px] w-[14px] text-[#898880] mb-2" />
           </InputLeftElement>
-          <Input className="!h-[31px] !w-[380px] border-[1px] border-[#D9D9D9]" />
+          <Input
+            className="!h-[31px] !w-[380px] border-[1px] border-[#D9D9D9]"
+            onChange={onSearch}
+          />
         </InputGroup>
       </div>
     </div>

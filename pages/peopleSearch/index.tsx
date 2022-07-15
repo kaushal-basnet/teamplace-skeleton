@@ -25,6 +25,7 @@ const PeopleSearch = () => {
   const { t } = useTranslation();
   const [totalCount, setTotalCount] = useState(0);
   const [toggle, settoggle] = useState(true);
+  const [searchText, setSearchText] = useState("");
   const getInfo = () => {
     return axios.get(
       "https://teamplace-development.an.r.appspot.com/user/random-featured-members"
@@ -47,6 +48,8 @@ const PeopleSearch = () => {
           strengths: filter.selectedJob.toString(),
           values: filter.selectedvalue.toString(),
           hobbies: filter.selectedhobbies.toString(),
+          // for search
+          query: searchText,
         },
       }
     );
@@ -60,6 +63,7 @@ const PeopleSearch = () => {
       filter.selectedJob,
       filter.selectedhobbies,
       filter.selectedvalue,
+      searchText,
     ],
     getSeeMore,
 
@@ -84,7 +88,12 @@ const PeopleSearch = () => {
   useEffect(() => {
     setAllData([]);
     // calls Api if these changes; used to maintain pagesize on success while filter
-  }, [filter.selectedJob, filter.selectedhobbies, filter.selectedvalue]);
+  }, [
+    filter.selectedJob,
+    filter.selectedhobbies,
+    filter.selectedvalue,
+    searchText,
+  ]);
 
   return (
     <>
@@ -95,6 +104,8 @@ const PeopleSearch = () => {
           filter={filter}
           setfilter={setfilter}
           settoggle={settoggle}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
         {toggle && (
           <div>
