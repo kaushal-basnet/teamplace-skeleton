@@ -32,6 +32,9 @@ const Header = () => {
           <Link href="/">
             <a className="headerAnchorTag">{t("Connections")} </a>
           </Link>
+          <Link href="/coworkation" >
+            <a className="headerAnchorTag text-2xl hover:text-3xl ">{t("Coworkation")} </a>
+          </Link>
         </div>
       </div>
       {/* right side */}
