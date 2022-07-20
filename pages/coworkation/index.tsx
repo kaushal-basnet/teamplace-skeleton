@@ -5,7 +5,7 @@ import COWORKATION from "../../coworkationApi";
 const Coworkation = () => {
   return (
     <>
-      <div className="relative h-screen max-w-[1440px] m-auto xl:pt-[25px] px-5 lg:px-24 py-[70px] lg:py-[75px] xl:h-[751px] w-full">
+      <div className="relative  h-full max-w-[1440px] m-auto xl:pt-[25px] px-5 lg:px-24 py-[70px] lg:py-[75px] mb-[75px] ">
         <div className=" lg:px-24 xl:top-[75px] lg:relative ">
           {/* <div className=" top-14 px-7 lg:px-24 xl:top-[75px] "> */}
           <h2 className="absolute font-bold  leading-[110%] z-[-1] top-[25px] lg:top-[-56px] left-[-4px] lg:left-1 text-[#F5F5F5] text-[110px]  lg:text-[160px]   ">
@@ -32,8 +32,11 @@ const Coworkation = () => {
           </div>
         </div>
       </div>
+
       {/* questions */}
-      <Question />
+      <div className="relative max-w-[1440px] m-auto px-5  lg:px-24 pt-[102px] pb-[79px] bg-[#F5F5F5]">
+        <Question />
+      </div>
     </>
   );
 };

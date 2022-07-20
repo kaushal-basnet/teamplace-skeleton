@@ -10,7 +10,7 @@ const CoworkationCard = ({ card, title, facilities, desc, img }: Props) => {
   return (
     <div
       className={
-        " relative flex flex-col text-white p-5 rounded-[10px] w-full xl:w-[394px] xl:h-[436px]  xl:p-[35px] md:w-[calc(50%-20px)] md:last:flex-1 xl:last:flex-auto"
+        " relative flex flex-col text-white p-5 rounded-[10px] w-full xl:w-[394px]   xl:p-[35px] md:w-[calc(50%-20px)] md:last:flex-1 xl:last:flex-auto"
       }
       // Tailwind CSS doesn't really deal with dynamic data, so use inline css
       style={{ backgroundImage: `url(/img/${img})` }}
