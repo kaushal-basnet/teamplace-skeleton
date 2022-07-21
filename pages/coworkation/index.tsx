@@ -1,14 +1,15 @@
 import React from "react";
 import { CoworkationCard, Question } from "../../components";
+import { Facility } from "../../components/molecules/Coworkation-facility";
 import COWORKATION from "../../coworkationApi";
 
 const Coworkation = () => {
   return (
     <>
-      <div className="relative  h-full max-w-[1440px] m-auto xl:pt-[25px] px-5 lg:px-24 py-[70px] lg:py-[75px] mb-[75px] ">
+      <div className="relative  h-full max-w-[1440px] m-auto xl:pt-[25px]  py-[70px] lg:py-[75px] mb-[75px] ">
         <div className=" lg:px-24 xl:top-[75px] lg:relative ">
           {/* <div className=" top-14 px-7 lg:px-24 xl:top-[75px] "> */}
-          <h2 className="absolute font-bold  leading-[110%] z-[-1] top-[25px] lg:top-[-56px] left-[-4px] lg:left-1 text-[#F5F5F5] text-[110px]  lg:text-[160px]   ">
+          <h2 className="absolute font-bold  leading-[110%] z-[-1] top-[25px] lg:top-[-56px] left-[-4px] lg:left-[-2px] text-[#F5F5F5] text-[110px]  lg:text-[160px]   ">
             POINT
           </h2>
           <h3 className="mb-[10px] text-[#1b1b1b font-bold leading-[140%] text-[30px] ">
@@ -34,8 +35,11 @@ const Coworkation = () => {
       </div>
 
       {/* questions */}
-      <div className="relative max-w-[1440px] m-auto px-5  lg:px-24  ">
+      <div className="relative max-w-[1440px] m-auto">
         <Question />
+      </div>
+      <div className="max-w-[1440px] mx-24 mt-[65px] mb-[93px] ">
+        <Facility />
       </div>
     </>
   );
