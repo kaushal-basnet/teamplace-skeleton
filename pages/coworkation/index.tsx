@@ -34,7 +34,7 @@ const Coworkation = () => {
       </div>
 
       {/* questions */}
-      <div className="relative max-w-[1440px] m-auto px-5  lg:px-24 pt-[102px] pb-[79px] bg-[#F5F5F5]">
+      <div className="relative max-w-[1440px] m-auto px-5  lg:px-24  ">
         <Question />
       </div>
     </>

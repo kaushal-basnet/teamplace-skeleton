@@ -1,10 +1,11 @@
 import { Button } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
-
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
+import { useState } from "react";
 const Question = () => {
+  const [show, setshow] = useState(true);
   return (
     <>
-      <div className="relative lg:px-24 pt-[102px] pb-[79px]">
+      <div className="relative lg:px-24 pt-[102px] pb-[79px] bg-[#F5F5F5]">
         <h2 className="absolute text-[#ffffff] text-[160px] leading-[110%] font-bold top-0 left-[-20px]">
           QUESTION
         </h2>
@@ -17,17 +18,29 @@ const Question = () => {
           </p>
         </div>
 
-        <div className="bg-[#ffffff] rounded-md w-full flex flex-col p-[27px] gap-y-[8px] my-[35px]">
+        <div className="bg-[#ffffff] rounded-md w-full flex flex-col p-[27px] gap-y-[8px] mt-[35px] mb-[63px] ">
           <div className=" flex justify-between">
             <h3 className="text-[20px] leading-[140%] text-[#1b1b1b] text-bold ">
               コワーケーション.comへの申し込みや内容の依頼はどうすればいいですか？
             </h3>
-            <ChevronDownIcon className="w-[25px] h-[25px] text-white bg-[#F95F00] rounded-full" />
+            <div
+              onClick={() => {
+                setshow(!show);
+              }}
+            >
+              {show ? (
+                <ChevronDownIcon className="w-[25px] h-[25px] text-white bg-[#F95F00] rounded-full" />
+              ) : (
+                <ChevronUpIcon className="w-[25px] h-[25px] text-white bg-[#F95F00] rounded-full" />
+              )}
+            </div>
           </div>
 
-          <p className="text-[16px] leading-7 text-[#1b1b1b]">
-            詳細は、キャンセルポリシーをご確認ください。
-          </p>
+          {!show && (
+            <p className="text-[16px] leading-7 text-[#1b1b1b]">
+              詳細は、キャンセルポリシーをご確認ください。
+            </p>
+          )}
         </div>
         <div className="text-center">
           <Button
