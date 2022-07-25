@@ -1,5 +1,5 @@
 import React from "react";
-import { CoworkationCard, Question } from "../../components";
+import { CoworkationCard, FacilityDetail, Question } from "../../components";
 import { Facility } from "../../components/molecules/Coworkation-facility";
 import COWORKATION from "../../coworkationApi";
 
@@ -40,6 +40,9 @@ const Coworkation = () => {
       </div>
       <div className="max-w-[1440px] mx-24 mt-[65px] mb-[93px] ">
         <Facility />
+      </div>
+      <div className="max-w-[1440px] mx-24 mt-[65px] mb-[93px] ">
+        <FacilityDetail />
       </div>
     </>
   );

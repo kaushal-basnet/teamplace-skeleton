@@ -4,3 +4,4 @@ export { Card } from "./Card";
 export { ModalSection } from "./ModalSection";
 export { CoworkationCard } from "./Coworkation-card";
 export { Question } from "./Coworkation-question";
+export { FacilityDetail } from "./FacilityDetail-coworkation";

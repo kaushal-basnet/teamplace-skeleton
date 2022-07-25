@@ -53,25 +53,13 @@ const Facility = () => {
               「体験」を届けたい
               <span className="text-[#F95F00]"> コンテンツ事業者</span>の方
             </h3>
-            <div className="grid grid-cols-2 gap-x-[17px] gap-y-4">
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px]  bg-[#ffffff] rounded-md  ">
-                研修・ゲームコンテンツ会社
-              </p>
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px] bg-[#ffffff] rounded-md  ">
-                研修プログラム事業者
-              </p>
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px] bg-[#ffffff] rounded-md  ">
-                ヨガ講師
-              </p>
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px] bg-[#ffffff] rounded-md  ">
-                フィットネス講師
-              </p>
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px] bg-[#ffffff] rounded-md  ">
-                地域ツアー事業者
-              </p>
-              <p className="text-[16px] leading-[140%] font-medium pt-[9px] pb-3 flex justify-center px-[22px] bg-[#ffffff] rounded-md  ">
-                ファシリテーター
-              </p>
+            <div className="grid grid-cols-2 gap-x-[17px] gap-y-4 [&>p]:text-[16px] [&>p]:leading-[140%] [&>p]:font-medium [&>p]:pt-[9px] [&>p]:pb-3 [&>p]:justify-center [&>p]:px-[22px] [&>p]:bg-[#ffffff] [&>p]:rounded-md  ">
+              <p>研修・ゲームコンテンツ会社</p>
+              <p>研修プログラム事業者</p>
+              <p>ヨガ講師</p>
+              <p>フィットネス講師</p>
+              <p>地域ツアー事業者</p>
+              <p>ファシリテーター</p>
             </div>
             <div className="flex flex-col items-center gap-[7px] pt-[17px] ">
               <EllipseIcon />

@@ -1,11 +1,13 @@
 import type { NextPage } from "next";
 import PeopleSearch from "./peopleSearch";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Space from "./space/[id]";
 
 const Home: NextPage = () => {
   return (
     <>
       <PeopleSearch />
+      <Space />
     </>
   );
 };
