@@ -5,3 +5,4 @@ export { ModalSection } from "./ModalSection";
 export { CoworkationCard } from "./Coworkation-card";
 export { Question } from "./Coworkation-question";
 export { FacilityDetail } from "./FacilityDetail-coworkation";
+export { CarouselCard } from "./CarouselCard";
