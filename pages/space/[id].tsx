@@ -1,6 +1,11 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
-import { CarouselCard, Header, OutlineBtn } from "../../components";
+import {
+  CarouselCard,
+  Header,
+  OutlineBtn,
+  SpaceBreath,
+} from "../../components";
 
 const Space = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +33,7 @@ const Space = () => {
             />
           </div>
         </div>
+        <SpaceBreath />
       </>
     </>
   );
